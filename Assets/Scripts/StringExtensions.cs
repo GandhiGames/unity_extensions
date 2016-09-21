@@ -1,53 +1,54 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Text;
+﻿using System.Text;
 
-namespace GameFoundations
+
+public static class StringExtensions
 {
-	public static class StringExtensions
-	{
-		public static bool ContainsPhrase (this string str, string[] phrases)
-		{
-			if (string.IsNullOrEmpty (str))
-				return false;
-			
-			foreach (var phrase in phrases) {
-				if (str.Contains (phrase)) {
-					return true;
-				}
-			}
-			
-			return false;
-		}
-		
-		public static string Truncate (this string str, int maxLength)
-		{
-			if (string.IsNullOrEmpty (str))
-				return str;
-			return str.Length <= maxLength ? str : str.Substring (0, maxLength);
-		}
+    public static bool ContainsPhrase(this string str, string[] phrases)
+    {
+        if (string.IsNullOrEmpty(str))
+            return false;
 
-		public static string InsertCharEveryNChars (this string str, char insertCharacter, int n, out int charsInserted)
-		{
-			charsInserted = 0;
+        foreach (var phrase in phrases)
+        {
+            if (str.Contains(phrase))
+            {
+                return true;
+            }
+        }
 
-			StringBuilder sb = new StringBuilder ();
-			for (int i = 0; i < str.Length; i++) {
-				if (i % n == 0) {
-					sb.Append (insertCharacter);
+        return false;
+    }
 
-					charsInserted++;
-				}
+    public static string Truncate(this string str, int maxLength)
+    {
+        if (string.IsNullOrEmpty(str))
+            return str;
+        return str.Length <= maxLength ? str : str.Substring(0, maxLength);
+    }
 
-				if (str [i] == insertCharacter) {
-					charsInserted++;
-				}
+    public static string InsertCharEveryNChars(this string str, char insertCharacter, int n, out int charsInserted)
+    {
+        charsInserted = 0;
 
-				sb.Append (str [i]);
-			}
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < str.Length; i++)
+        {
+            if (i % n == 0)
+            {
+                sb.Append(insertCharacter);
 
-			return sb.ToString ();
-		}
+                charsInserted++;
+            }
 
-	}
+            if (str[i] == insertCharacter)
+            {
+                charsInserted++;
+            }
+
+            sb.Append(str[i]);
+        }
+
+        return sb.ToString();
+    }
+
 }
